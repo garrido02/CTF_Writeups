@@ -1,0 +1,30 @@
+cd
+ls
+ls -al
+mkdir .ssh
+cd .ssh/
+ls
+ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa
+ls -al
+cat id_rsa
+cd ..
+id
+sudo -l
+cd ..
+cd var
+cd www
+cd html
+ls a-l
+ls -al
+get 
+cd
+exit
+cd
+ls -al
+cd /var/www/html/
+ls
+ls a-l
+ls -al
+cd
+ls
+exit

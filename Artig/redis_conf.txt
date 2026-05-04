@@ -1,0 +1,1 @@
+# Dear Mario, this is Max. The password you put here for the Redis server it's too weak and anyone can guess it. Please change it!

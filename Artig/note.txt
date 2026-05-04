@@ -1,0 +1,9 @@
+Hello team,
+
+Max here - the new sysadmin. After a quick analysis of the system, I’ve noticed a few inconsistencies left by the previous admin, particularly around some core services and their conf files. For now, I’d prefer not to touch anything too sensitive until I have a clearer picture.
+
+I’m currently testing a site editor plugin a colleague recommended. The homepage is still empty while I sort things out, but it should be up soon.
+
+For the time being, SSH access has been restricted to admin accounts only.
+
+Please be patient, and apologies for any inconvenience. I’m working as quickly as possible to get everything back in order.

@@ -1,0 +1,165 @@
+wpscan --url http://artig.hvm --api-token CjdxedooTOFjVNVxFgto1FhssA3o8x5LWFaWEp9EcSk --enumerate vp,vt,tt,cb,dbe,u --plugins-detection aggressive --force --random-user-agent
+_______________________________________________________________
+         __          _______   _____
+         \ \        / /  __ \ / ____|
+          \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+           \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.28
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________
+
+[+] URL: http://artig.hvm/ [192.168.1.126]
+[+] Started: Sun May  3 18:49:00 2026
+
+Interesting Finding(s):
+
+[+] Headers
+ | Interesting Entry: Server: Apache/2.4.66 (Debian)
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%
+
+[+] XML-RPC seems to be enabled: http://artig.hvm/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/
+
+[+] WordPress readme found: http://artig.hvm/readme.html
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] The external WP-Cron seems to be enabled: http://artig.hvm/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299
+
+[+] WordPress version 6.9.4 identified (Latest, released on 2026-03-11).
+ | Found By: Rss Generator (Passive Detection)
+ |  - http://artig.hvm/index.php/feed/, <generator>https://wordpress.org/?v=6.9.4</generator>
+ |  - http://artig.hvm/index.php/comments/feed/, <generator>https://wordpress.org/?v=6.9.4</generator>
+
+[+] WordPress theme in use: twentytwentyfive
+ | Location: http://artig.hvm/wp-content/themes/twentytwentyfive/
+ | Latest Version: 1.4 (up to date)
+ | Last Updated: 2025-12-03T00:00:00.000Z
+ | Readme: http://artig.hvm/wp-content/themes/twentytwentyfive/readme.txt
+ | Style URL: http://artig.hvm/wp-content/themes/twentytwentyfive/style.css
+ | Style Name: Twenty Twenty-Five
+ | Style URI: https://wordpress.org/themes/twentytwentyfive/
+ | Description: Twenty Twenty-Five emphasizes simplicity and adaptability. It offers flexible design options, suppor...
+ | Author: the WordPress team
+ | Author URI: https://wordpress.org
+ |
+ | Found By: Urls In Homepage (Passive Detection)
+ |
+ | Version: 1.4 (80% confidence)
+ | Found By: Style (Passive Detection)
+ |  - http://artig.hvm/wp-content/themes/twentytwentyfive/style.css, Match: 'Version: 1.4'
+
+[+] Enumerating Vulnerable Plugins (via Aggressive Methods)
+ Checking Known Locations - Time: 00:00:11 <============> (7343 / 7343) 100.00% Time: 00:00:11
+[+] Checking Plugin Versions (via Passive and Aggressive Methods)
+
+[i] Plugin(s) Identified:
+
+[+] akismet
+ | Location: http://artig.hvm/wp-content/plugins/akismet/
+ | Latest Version: 5.7
+ | Last Updated: 2026-04-23T22:34:00.000Z
+ |
+ | Found By: Known Locations (Aggressive Detection)
+ |  - http://artig.hvm/wp-content/plugins/akismet/, status: 403
+ |
+ | [!] 1 vulnerability identified:
+ |
+ | [!] Title: Akismet 2.5.0-3.1.4 - Unauthenticated Stored Cross-Site Scripting (XSS)
+ |     Fixed in: 3.1.5
+ |     References:
+ |      - https://wpscan.com/vulnerability/1a2f3094-5970-4251-9ed0-ec595a0cd26c
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-9357
+ |      - http://blog.akismet.com/2015/10/13/akismet-3-1-5-wordpress/
+ |      - https://blog.sucuri.net/2015/10/security-advisory-stored-xss-in-akismet-wordpress-plugin.html
+ |
+ | The version could not be determined.
+
+[+] site-editor
+ | Location: http://artig.hvm/wp-content/plugins/site-editor/
+ | Last Updated: 2017-05-02T23:34:00.000Z
+ | Readme: http://artig.hvm/wp-content/plugins/site-editor/readme.txt
+ | [!] The version is out of date, the latest version is 1.1.1
+ |
+ | Found By: Known Locations (Aggressive Detection)
+ |  - http://artig.hvm/wp-content/plugins/site-editor/, status: 200
+ |
+ | [!] 1 vulnerability identified:
+ |
+ | [!] Title: Site Editor <= 1.1.1 - Local File Inclusion (LFI)
+ |     References:
+ |      - https://wpscan.com/vulnerability/4432ecea-2b01-4d5c-9557-352042a57e44
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7422
+ |      - https://seclists.org/fulldisclosure/2018/Mar/40
+ |      - https://github.com/SiteEditor/editor/issues/2
+ |
+ | Version: 1.1 (100% confidence)
+ | Found By: Readme - Stable Tag (Aggressive Detection)
+ |  - http://artig.hvm/wp-content/plugins/site-editor/readme.txt
+ | Confirmed By: Readme - ChangeLog Section (Aggressive Detection)
+ |  - http://artig.hvm/wp-content/plugins/site-editor/readme.txt
+
+[+] Enumerating Vulnerable Themes (via Passive and Aggressive Methods)
+ Checking Known Locations - Time: 00:00:00 <==============> (652 / 652) 100.00% Time: 00:00:00
+[+] Checking Theme Versions (via Passive and Aggressive Methods)
+
+[i] No themes Found.
+
+[+] Enumerating Timthumbs (via Passive and Aggressive Methods)
+ Checking Known Locations - Time: 00:00:03 <============> (2575 / 2575) 100.00% Time: 00:00:03
+
+[i] No Timthumbs Found.
+
+[+] Enumerating Config Backups (via Passive and Aggressive Methods)
+ Checking Config Backups - Time: 00:00:00 <===============> (137 / 137) 100.00% Time: 00:00:00
+
+[i] No Config Backups Found.
+
+[+] Enumerating DB Exports (via Passive and Aggressive Methods)
+ Checking DB Exports - Time: 00:00:00 <=====================> (75 / 75) 100.00% Time: 00:00:00
+
+[i] No DB Exports Found.
+
+[+] Enumerating Users (via Passive and Aggressive Methods)
+ Brute Forcing Author IDs - Time: 00:00:00 <================> (10 / 10) 100.00% Time: 00:00:00
+
+[i] User(s) Identified:
+
+[+] max
+ | Found By: Rss Generator (Passive Detection)
+ | Confirmed By:
+ |  Wp Json Api (Aggressive Detection)
+ |   - http://artig.hvm/index.php/wp-json/wp/v2/users/?per_page=100&page=1
+ |  Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ |  Login Error Messages (Aggressive Detection)
+
+[+] WPScan DB API OK
+ | Plan: free
+ | Requests Done (during the scan): 5
+ | Requests Remaining: 20
+
+[+] Finished: Sun May  3 18:49:23 2026
+[+] Requests Done: 10853
+[+] Cached Requests: 13
+[+] Data Sent: 2.885 MB
+[+] Data Received: 1.779 MB
+[+] Memory used: 269.492 MB
+[+] Elapsed time: 00:00:23
