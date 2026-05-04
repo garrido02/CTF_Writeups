@@ -17,6 +17,7 @@ Starting arp-scan 1.10.0 with 256 hosts (https://github.com/royhills/arp-scan)
 
 7 packets received by filter, 0 packets dropped by kernel
 Ending arp-scan 1.10.0: 256 hosts scanned in 2.007 seconds (127.55 hosts/sec). 7 responded
+```
 
 ```bash
 └─$ nmap -sC -sV -p- 192.168.1.126
@@ -51,6 +52,7 @@ MAC Address: 08:00:27:AD:30:59 (Oracle VirtualBox virtual NIC)                  
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 16.80 seconds
+```
 
 2. I accessed anonymous FTP and extracted the operational note.
 
