@@ -156,6 +156,8 @@ lj\p
 Look Deep within y0ur_self for the answer
 ```
 
+## Footholding
+
 which lead to another website  
 
 <img width="810" height="434" alt="imagem" src="https://github.com/user-attachments/assets/55e6bd2b-8cb7-47da-a51d-606ecd4a4fc7" />  
@@ -209,6 +211,8 @@ john -wordlist:9.answer_decoded.txt 11.lmao.hash
 
 <img width="554" height="561" alt="imagem" src="https://github.com/user-attachments/assets/3640fc42-30b9-4bf9-993c-4c59fefcd247" />  
 
+## Entering the machine
+
 So with this new RSA key we could try to login into SSH with username: noob  
 
 ``` bash
@@ -224,6 +228,8 @@ ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -i noob -t noob@192.168.1.128 "() { :;}
 ```
 
 <img width="575" height="216" alt="imagem" src="https://github.com/user-attachments/assets/7ad0654d-0487-4b81-b23a-e35332c41502" />  
+
+## Priviledge Escalation   
 
 Now that we have access, we can explore. No luck on normal directories such has /opt, /tmp or others. Therefore the next step was looking for known CVEs for this machine's version  
 
