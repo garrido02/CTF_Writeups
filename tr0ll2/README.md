@@ -193,6 +193,9 @@ This lead me to a zip file with a password
 
 <img width="391" height="151" alt="imagem" src="https://github.com/user-attachments/assets/46ae060d-7c71-4919-bdb8-adae36251ad8" />  
 
+  
+## Entering the machine  
+
 The next step was hashing the zip so we could bruteforce it with the decoded base64 file we just got  
 
 ``` bash
@@ -211,7 +214,6 @@ john -wordlist:9.answer_decoded.txt 11.lmao.hash
 
 <img width="554" height="561" alt="imagem" src="https://github.com/user-attachments/assets/3640fc42-30b9-4bf9-993c-4c59fefcd247" />  
 
-## Entering the machine
 
 So with this new RSA key we could try to login into SSH with username: noob  
 
