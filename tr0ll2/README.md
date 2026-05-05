@@ -207,10 +207,6 @@ A match was found which would likely unzip the file
 
 <img width="546" height="221" alt="imagem" src="https://github.com/user-attachments/assets/7d6dc97b-0b7c-4f2b-b22d-a0952e459050" />  
 
-``` bash
-zip2john lmao.zip > 11.lmao.hash
-john -wordlist:9.answer_decoded.txt 11.lmao.hash
-```
 
 <img width="554" height="561" alt="imagem" src="https://github.com/user-attachments/assets/3640fc42-30b9-4bf9-993c-4c59fefcd247" />  
 
