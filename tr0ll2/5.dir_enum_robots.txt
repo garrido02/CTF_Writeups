@@ -1,0 +1,21 @@
+===============================================================
+Gobuster v3.8.2
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://192.168.1.128/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                4.robots.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.8.2
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+noob                 (Status: 301) [Size: 313] [--> http://192.168.1.128/noob/]
+keep_trying          (Status: 301) [Size: 320] [--> http://192.168.1.128/keep_trying/]
+dont_bother          (Status: 301) [Size: 320] [--> http://192.168.1.128/dont_bother/]
+ok_this_is_it        (Status: 301) [Size: 322] [--> http://192.168.1.128/ok_this_is_it/]
+===============================================================
+Finished
+===============================================================
