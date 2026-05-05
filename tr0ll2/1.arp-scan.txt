@@ -1,0 +1,12 @@
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:34:92:a3, IPv4: 192.168.1.124
+Starting arp-scan 1.10.0 with 256 hosts (https://github.com/royhills/arp-scan)
+192.168.1.1	ec:4d:47:0b:94:4d	HUAWEI TECHNOLOGIES CO.,LTD
+192.168.1.64	9c:52:f8:82:50:1c	HUAWEI TECHNOLOGIES CO.,LTD
+192.168.1.69	2c:6f:c9:3e:16:fd	Hon Hai Precision Ind. Co.,Ltd.
+192.168.1.68	34:db:9c:3a:e9:17	Sagemcom Broadband SAS
+192.168.1.74	34:db:9c:3a:e8:1f	Sagemcom Broadband SAS
+192.168.1.65	7e:2d:55:cc:dd:25	(Unknown: locally administered)
+192.168.1.128	00:0c:29:46:08:55	VMware, Inc.
+
+7 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.10.0: 256 hosts scanned in 2.154 seconds (118.85 hosts/sec). 7 responded
